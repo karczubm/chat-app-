@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="chat.js"></script>
+    <script>
+        var chat = new Chat();
+        $(document).ready(function () {
+            chat.isLoggedIn();
+            chat.update();
+            setInterval(function () { chat.update(); }, 1500);
+            //onClick events
+            $('#login').submit(function(e){e.preventDefault(); chat.login($('#userName').val(), $('#userPassword').val())});
+            $('#sendPost').submit(function(e){e.preventDefault(); chat.send($("#postText").val()); $('#postText').val(''); });
+            
+        });
+
+    </script>
+</head>
+
+<body>
+
+    <div id="page-wrap">
+
+        <div id="login-wrap">
+            <form method="POST" id="login" name="loginForm" onsubmit="return false">
+                <label for="userName">Username:</label>
+                <input type="text" name="userName" id="userName">
+                <label for="userPassword">Password</label>
+                <input type="password" name="userPassword" id="userPassword">
+                <button type="submit">Login</button><br>
+            </form>
+        </div>
+
+        <p id="name"></p>
+
+        <div id="chat-wrap" style="height:55vh;width:100vh;border:1px solid ;overflow:auto">
+            <div id="chat-area"></div>
+        </div>
+
+        <form id="sendPost">
+            <p>Message: </p>
+            <textarea id="postText" maxlength='100' style="height:15vh;width:100vh;border:1px solid"></textarea><br>
+            <button type="submit" >Send</button>
+        </form>
+
+    </div>
+
+</body>
+
+</html>
